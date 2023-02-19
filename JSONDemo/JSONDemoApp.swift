@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct JSONDemoApp: App {
+  
+  let persistenceController = PersistenceController.shared
+  
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+          OneToOneSearchSort()
+//          OneToMany()
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

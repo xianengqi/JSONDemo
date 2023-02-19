@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Club" representedClassName="Club" syncable="YES" codeGenerationType="class">
+        <attribute name="clubName" optional="YES" attributeType="String"/>
+        <attribute name="teacher" optional="YES" attributeType="String"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="club" inverseEntity="Student"/>
+    </entity>
+    <entity name="Student" representedClassName="Student" syncable="YES" codeGenerationType="class">
+        <attribute name="absentDays" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nameOfClass" optional="YES" attributeType="String"/>
+        <attribute name="sid" optional="YES" attributeType="String"/>
+        <attribute name="sortClub" optional="YES" attributeType="String"/>
+        <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="students" inverseEntity="Club"/>
+    </entity>
+    <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
+        <attribute name="checked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+</model>

@@ -32,7 +32,7 @@ func registSampleData(context: NSManagedObjectContext) {
     ["吹奏楽", "アカカンガルー"],
   ]
   
-  /// Student Delete 这是查找Student表并删除所有记录的过程。
+  /// Student Delete 这是查找Student表并删除重复记录的过程。
   let fetchRequestStudent = NSFetchRequest<NSFetchRequestResult>()
   fetchRequestStudent.entity = Student.entity()
   let students = try? context.fetch(fetchRequestStudent) as? [Student]
@@ -40,7 +40,7 @@ func registSampleData(context: NSManagedObjectContext) {
     context.delete(student)
   }
   
-  /// Club Delete 这是查找Club表并删除所有记录的过程。
+  /// Club Delete 这是查找Club表并删除重复记录的过程。
   let fetchRequestClub = NSFetchRequest<NSFetchRequestResult>()
   fetchRequestClub.entity = Club.entity()
   let clubs = try? context.fetch(fetchRequestClub) as? [Club]

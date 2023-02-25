@@ -10,14 +10,18 @@ import SwiftUI
 @main
 struct JSONDemoApp: App {
   
-  let persistenceController = PersistenceController.shared
+//  let persistenceController = PersistenceController.shared
+  
+  @StateObject private var coredataStack = CoreDataStack()
   
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-          OneToOneSearchSort()
+//          OneToOneSearchSort()
 //          OneToMany()
-            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//          OneToOneView()
+          ProductStockView()
+            .environment(\.managedObjectContext, coredataStack.container.viewContext)
         }
     }
 }

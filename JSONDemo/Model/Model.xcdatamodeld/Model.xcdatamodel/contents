@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21752.1" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Club" representedClassName="Club" syncable="YES" codeGenerationType="class">
         <attribute name="clubName" optional="YES" attributeType="String"/>
         <attribute name="teacher" optional="YES" attributeType="String"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="club" inverseEntity="Student"/>
+    </entity>
+    <entity name="Sku" representedClassName="Sku" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="size" optional="YES" attributeType="String"/>
+        <attribute name="sku_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="stock" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="spu" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Spu" inverseName="sku" inverseEntity="Spu"/>
+    </entity>
+    <entity name="Spu" representedClassName="Spu" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionClothes" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="sku" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sku" inverseName="spu" inverseEntity="Sku"/>
     </entity>
     <entity name="Student" representedClassName="Student" syncable="YES" codeGenerationType="class">
         <attribute name="absentDays" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

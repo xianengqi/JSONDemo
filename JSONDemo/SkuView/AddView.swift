@@ -114,6 +114,25 @@ struct AddView: View {
 
 struct ColorView: View {
   @State private var phase = 0.0
+  @State private var showingAlert = false
+  @State private var deleteAlert = false
+  @State private var name = ""
+
+  // 创建一个空数组，然后把name里的值保存到空数组里面
+  @State private var colors: [String] = []
+
+  private func submit() {
+    // 把颜色添加进来
+    colors.append(name)
+    // 清空颜色
+    name = ""
+    print("You entered \(name)")
+    print("You entered \(colors)")
+  }
+
+  
+
+  
 
   var body: some View {
     ZStack {
@@ -157,14 +176,37 @@ struct ColorView: View {
 
   @ViewBuilder
   private func content() -> some View {
-    HFlow(itemSpacing: 14, rowSpacing: 10) {
+    HFlow(itemSpacing: 10, rowSpacing: 10) {
       // 循环显示颜色
-      ForEach(0 ..< 10) { _ in
-        RoundedRectangle(cornerRadius: 4)
-          .stroke(Color.black, lineWidth: 1)
-          .opacity(0.5)
-          .frame(width: 60, height: 30)
+      ForEach(colors, id: \.self) { color in
+
+        Text(color)
+        
+          .foregroundColor(.black)
+          .padding()
+          .frame(height: 30)
+          .contentShape(Rectangle())
+        
+          
+        // 长按弹出提示删除框
+          .onLongPressGesture {
+            
+            colors.remove(at: colors.firstIndex(of: color)!)
+            print("长按删除\(colors)")
+
+          }
+
+          
+          .overlay(
+            RoundedRectangle(cornerRadius: 4)
+
+              .strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1))
+              .opacity(0.5)
+//              .frame(width: 80, height: 30)
+          )
+         
       }
+
       Text("新增颜色")
         .foregroundColor(Color.red)
         // 给文字添加红色外框
@@ -180,7 +222,17 @@ struct ColorView: View {
               }
             }
         )
+        .contentShape(Rectangle())
+
+        .onTapGesture {
+          showingAlert = true
+        }
+        .alert("新增颜色", isPresented: $showingAlert) {
+          TextField("请输入颜色", text: $name)
+          Button("确定", action: submit)
+        }
     }
+    .padding(8)
 
 //    .frame(maxWidth: 300)
   }

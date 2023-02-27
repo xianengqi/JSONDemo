@@ -50,8 +50,8 @@ struct ProductStockView: View {
   @FetchRequest(
     entity: Sku.entity(),
     sortDescriptors: [
-      NSSortDescriptor(keyPath: \Sku.color, ascending: true),
-      NSSortDescriptor(keyPath: \Sku.size, ascending: true)
+      NSSortDescriptor(keyPath: \Sku.sku_id, ascending: true),
+//      NSSortDescriptor(keyPath: \Sku.size, ascending: true)
     ]
 //    predicate: NSPredicate(format: "spu == %@", "连衣裙")
   ) var skus: FetchedResults<Sku>
@@ -85,6 +85,8 @@ struct ProductStockView: View {
     }
   }
   
+  // 库存总计
+  
   var body: some View {
     NavigationStack {
       VStack {
@@ -93,14 +95,13 @@ struct ProductStockView: View {
             ForEach(Array(Set(skus.map(\.color))), id: \.self) { color in
               VStack {
                 Text("\(color ?? "无")")
-                  
                   .onTapGesture {
-                    if color == color {
-                      self.isSortColor = color ?? ""
-                      print("\(color ?? "wu")")
-                    }
+                    self.isSortColor = color ?? ""
+                    print("\(color ?? "wu")")
                   }
                 Text("尺码\(skus.filter { $0.color == color }.count)个")
+                // 库存总计
+                Text("库存\(skus.filter { $0.color == color }.reduce(0) { $0 + Int($1.stock) })")
               }
             }
           }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 16.4, *)
 @main
 struct JSONDemoApp: App {
   
@@ -20,7 +21,8 @@ struct JSONDemoApp: App {
 //          OneToOneSearchSort()
 //          OneToMany()
 //          OneToOneView()
-          ProductStockView()
+//          ProductStockView()
+          AddView()
             .environment(\.managedObjectContext, coredataStack.container.viewContext)
         }
     }

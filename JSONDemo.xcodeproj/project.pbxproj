@@ -14,6 +14,8 @@
 		C3B3B1EC29AA272400CA5663 /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1EB29AA272400CA5663 /* FilteredList.swift */; };
 		C3B3B1F329AA29E200CA5663 /* Sku+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1F129AA29E200CA5663 /* Sku+CoreDataClass.swift */; };
 		C3B3B1F429AA29E200CA5663 /* Sku+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1F229AA29E200CA5663 /* Sku+CoreDataProperties.swift */; };
+		C3B3B1F629ACB63F00CA5663 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1F529ACB63F00CA5663 /* AddView.swift */; };
+		C3B3B20429ACE3BE00CA5663 /* FirstExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B20329ACE3BE00CA5663 /* FirstExample.swift */; };
 		C3B45A4929A62EBD00D4153F /* TestSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B45A4829A62EBD00D4153F /* TestSample.swift */; };
 		C3C4352A299FA01000ACE9D1 /* JSONDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C43529299FA01000ACE9D1 /* JSONDemoApp.swift */; };
 		C3C4352C299FA01000ACE9D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4352B299FA01000ACE9D1 /* ContentView.swift */; };
@@ -29,6 +31,7 @@
 		C3C4355229A2546300ACE9D1 /* OneToMany.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4355129A2546300ACE9D1 /* OneToMany.swift */; };
 		C3C4355429A25CCA00ACE9D1 /* StudentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4355329A25CCA00ACE9D1 /* StudentsList.swift */; };
 		C3C4355629A25D0D00ACE9D1 /* OneToOneSearchSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4355529A25D0D00ACE9D1 /* OneToOneSearchSort.swift */; };
+		C3CFC3E029ACF88C00148522 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = C3CFC3DF29ACF88C00148522 /* Flow */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,8 @@
 		C3B3B1EB29AA272400CA5663 /* FilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 		C3B3B1F129AA29E200CA5663 /* Sku+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sku+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C3B3B1F229AA29E200CA5663 /* Sku+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sku+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C3B3B1F529ACB63F00CA5663 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		C3B3B20329ACE3BE00CA5663 /* FirstExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstExample.swift; sourceTree = "<group>"; };
 		C3B45A4829A62EBD00D4153F /* TestSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSample.swift; sourceTree = "<group>"; };
 		C3C43526299FA01000ACE9D1 /* JSONDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSONDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C43529299FA01000ACE9D1 /* JSONDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDemoApp.swift; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CFC3E029ACF88C00148522 /* Flow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				C3B45A4829A62EBD00D4153F /* TestSample.swift */,
+				C3B3B1F529ACB63F00CA5663 /* AddView.swift */,
 				C3B3B1EB29AA272400CA5663 /* FilteredList.swift */,
 				C3B3B1E629A8E25600CA5663 /* Sorting.swift */,
 				C31A414129A7917400D30595 /* AddSkuView.swift */,
@@ -84,8 +91,16 @@
 			isa = PBXGroup;
 			children = (
 				C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */,
+				C3B3B20329ACE3BE00CA5663 /* FirstExample.swift */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		C3B3B1F729ACD6C400CA5663 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		C3C4351D299FA01000ACE9D1 = {
@@ -111,6 +126,7 @@
 				C3C4355129A2546300ACE9D1 /* OneToMany.swift */,
 				C3C4352B299FA01000ACE9D1 /* ContentView.swift */,
 				C3C4354529A247A500ACE9D1 /* OneToOneView.swift */,
+				C3B3B1F729ACD6C400CA5663 /* Helper */,
 				C3C4355529A25D0D00ACE9D1 /* OneToOneSearchSort.swift */,
 				C3B3B1E829AA171700CA5663 /* Example */,
 				C3B3B1E329A8DC2800CA5663 /* SkuView */,
@@ -161,6 +177,9 @@
 			dependencies = (
 			);
 			name = JSONDemo;
+			packageProductDependencies = (
+				C3CFC3DF29ACF88C00148522 /* Flow */,
+			);
 			productName = JSONDemo;
 			productReference = C3C43526299FA01000ACE9D1 /* JSONDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -189,6 +208,9 @@
 				Base,
 			);
 			mainGroup = C3C4351D299FA01000ACE9D1;
+			packageReferences = (
+				C3CFC3DE29ACF88C00148522 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
+			);
 			productRefGroup = C3C43527299FA01000ACE9D1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -228,9 +250,11 @@
 				C3C4355429A25CCA00ACE9D1 /* StudentsList.swift in Sources */,
 				C3C4352A299FA01000ACE9D1 /* JSONDemoApp.swift in Sources */,
 				C3B3B1E729A8E25600CA5663 /* Sorting.swift in Sources */,
+				C3B3B1F629ACB63F00CA5663 /* AddView.swift in Sources */,
 				C3C4354629A247A500ACE9D1 /* OneToOneView.swift in Sources */,
 				C3B3B1E529A8DC4200CA5663 /* EditSkuView.swift in Sources */,
 				C3C4355629A25D0D00ACE9D1 /* OneToOneSearchSort.swift in Sources */,
+				C3B3B20429ACE3BE00CA5663 /* FirstExample.swift in Sources */,
 				C3C4355229A2546300ACE9D1 /* OneToMany.swift in Sources */,
 				C3B3B1EC29AA272400CA5663 /* FilteredList.swift in Sources */,
 				C3B3B1F429AA29E200CA5663 /* Sku+CoreDataProperties.swift in Sources */,
@@ -277,6 +301,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -337,6 +362,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -435,6 +461,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C3CFC3DE29ACF88C00148522 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tevelee/SwiftUI-Flow.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C3CFC3DF29ACF88C00148522 /* Flow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3CFC3DE29ACF88C00148522 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
+			productName = Flow;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C3C4354029A237A000ACE9D1 /* Model.xcdatamodeld */ = {

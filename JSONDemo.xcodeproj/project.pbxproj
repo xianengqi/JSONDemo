@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C31A414229A7917400D30595 /* AddSkuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31A414129A7917400D30595 /* AddSkuView.swift */; };
+		C3418F8E29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F8C29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift */; };
+		C3418F8F29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F8D29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift */; };
+		C3418F9129B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F9029B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift */; };
 		C3B3B1E529A8DC4200CA5663 /* EditSkuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1E429A8DC4200CA5663 /* EditSkuView.swift */; };
 		C3B3B1E729A8E25600CA5663 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1E629A8E25600CA5663 /* Sorting.swift */; };
 		C3B3B1EA29AA174300CA5663 /* PredicateViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */; };
@@ -36,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		C31A414129A7917400D30595 /* AddSkuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSkuView.swift; sourceTree = "<group>"; };
+		C3418F8C29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C3418F8D29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C3418F9029B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ColorEntity+CoreDataProperties.swift"; path = "JSONDemo/Model/ColorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C3B3B1E429A8DC4200CA5663 /* EditSkuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSkuView.swift; sourceTree = "<group>"; };
 		C3B3B1E629A8E25600CA5663 /* Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateViewDemo.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 		C3C4351D299FA01000ACE9D1 = {
 			isa = PBXGroup;
 			children = (
+				C3418F9029B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift */,
 				C3C43528299FA01000ACE9D1 /* JSONDemo */,
 				C3C43527299FA01000ACE9D1 /* Products */,
 			);
@@ -150,6 +157,8 @@
 		C3C43537299FA11100ACE9D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C3418F8C29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift */,
+				C3418F8D29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift */,
 				C3B3B1F129AA29E200CA5663 /* Sku+CoreDataClass.swift */,
 				C3B3B1F229AA29E200CA5663 /* Sku+CoreDataProperties.swift */,
 				C3C4354029A237A000ACE9D1 /* Model.xcdatamodeld */,
@@ -238,7 +247,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3418F8E29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift in Sources */,
 				C3C4353B299FA18600ACE9D1 /* JSONManager.swift in Sources */,
+				C3418F8F29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */,
 				C31A414229A7917400D30595 /* AddSkuView.swift in Sources */,
 				C3C4353F299FA81600ACE9D1 /* DetailView.swift in Sources */,
 				C3B3B1F329AA29E200CA5663 /* Sku+CoreDataClass.swift in Sources */,
@@ -250,6 +261,7 @@
 				C3C4355429A25CCA00ACE9D1 /* StudentsList.swift in Sources */,
 				C3C4352A299FA01000ACE9D1 /* JSONDemoApp.swift in Sources */,
 				C3B3B1E729A8E25600CA5663 /* Sorting.swift in Sources */,
+				C3418F9129B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */,
 				C3B3B1F629ACB63F00CA5663 /* AddView.swift in Sources */,
 				C3C4354629A247A500ACE9D1 /* OneToOneView.swift in Sources */,
 				C3B3B1E529A8DC4200CA5663 /* EditSkuView.swift in Sources */,

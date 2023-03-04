@@ -5,6 +5,17 @@
         <attribute name="teacher" optional="YES" attributeType="String"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="club" inverseEntity="Student"/>
     </entity>
+    <entity name="ColorEntity" representedClassName="ColorEntity" syncable="YES">
+        <attribute name="colors" optional="YES" attributeType="Transformable"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="selectedColors" optional="YES" attributeType="Transformable"/>
+    </entity>
+    <entity name="ProductEntity" representedClassName="ProductEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionText" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="colors" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ColorEntity"/>
+    </entity>
     <entity name="Sku" representedClassName="Sku" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>

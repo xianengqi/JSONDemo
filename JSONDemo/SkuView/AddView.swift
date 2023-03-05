@@ -63,12 +63,13 @@ struct AddView: View {
           .foregroundColor(.black)
           .frame(maxWidth: .infinity, alignment: .leading)
       }
+      .frame(width: 40)
 
       Color.clear.overlay {
         Text(selectedColors.isEmpty ? "选择颜色" : "\(selectedColors.joined(separator: ", "))")
           .foregroundColor(.black)
           .opacity(0.7)
-          .frame(maxWidth: .infinity, alignment: .leading)
+          .frame(maxWidth: .infinity, alignment: .center)
       }
 
       Color.clear.overlay {
@@ -76,7 +77,7 @@ struct AddView: View {
           .foregroundColor(.black)
           .opacity(0.7)
           .frame(maxWidth: .infinity, alignment: .trailing)
-      }
+      }.frame(width: 10)
     }
     // 整行点击状态
     .contentShape(Rectangle())
@@ -107,7 +108,7 @@ struct AddView: View {
         Text("选择尺码")
           .foregroundColor(.black)
           .opacity(0.7)
-          .frame(maxWidth: .infinity, alignment: .leading)
+          .frame(maxWidth: .infinity, alignment: .center)
       }
 
       Color.clear.overlay {
@@ -160,6 +161,7 @@ struct ColorView: View {
   @State private var phase = 0.0
   @State private var showingAlert = false
   @State private var deleteAlert = false
+  @State private var isSelectedColor = false
   @State private var name = ""
   @State private var deleteIndex: Int?
   @State private var colors333: [String] = []
@@ -183,7 +185,7 @@ struct ColorView: View {
     // 把颜色添加进来
     let newColor = ColorEntity(context: viewContext)
     newColor.colors = [name]
-    newColor.isSelected = false
+//    newColor.isSelected = false
     colors222.append(newColor)
 
     do {
@@ -193,6 +195,7 @@ struct ColorView: View {
     }
     // 清空颜色
     name = ""
+//    newColor.isSelected = false
     print("You entered \(name)")
     print("You entered \(colors)")
   }
@@ -260,13 +263,13 @@ struct ColorView: View {
                   .preference(key: TextExWidthKey.self, value: geometry.size.width)
               }
 
-              if color.isSelected {
+              if isSelectedColor {
                 // 给image加上红色圆圈
 
                 ZStack {
                   // 打勾时，出现红色圆圈
                   Circle()
-                    .foregroundColor(.red)
+                    .foregroundColor(.orange)
                     .frame(height: 10)
 
                   // 让image出现在红色圆圈上面
@@ -280,7 +283,7 @@ struct ColorView: View {
 
               RoundedRectangle(cornerRadius: 4)
 
-                .strokeBorder(color.isSelected ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
+                .strokeBorder(isSelectedColor ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
                 .opacity(0.5)
             }
           )
@@ -291,21 +294,17 @@ struct ColorView: View {
             // 如果颜色已经被选择，则从selectedColors数组中删除它；否则，将其添加到数组中
             if color.colors.allSatisfy({ selectedColors.contains($0) }) {
               selectedColors.removeAll(where: { $0 == color.colors.first })
-              color.isSelected = false
+              isSelectedColor = false
             } else {
               selectedColors.append(contentsOf: color.colors)
-              color.isSelected = true
+              isSelectedColor = true
             }
             do {
               try viewContext.save()
             } catch {
               print("Error saving color: \(error.localizedDescription)")
             }
-//          if color.colors.allSatisfy({ selectedColors222.contains($0) }) {
-//            selectedColors222.removeAll(where: { $0 == color.colors.first })
-//          } else {
-//            selectedColors222.append(contentsOf: color.colors)
-//          }
+
           }
 
           // 长按弹出提示删除框
@@ -375,6 +374,7 @@ struct ColorView: View {
 
           // 将选择的颜色和尺码清空，将显示另一个视图
 //          selectedColors.removeAll()
+
           presentationMode.wrappedValue.dismiss()
         }
       }.padding()
@@ -403,12 +403,12 @@ struct SizeView: View {
   }
 }
 
-// @available(iOS 16.4, *)
-// struct AddView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    AddView()
-//  }
-// }
+ @available(iOS 16.4, *)
+ struct AddView_Previews: PreviewProvider {
+  static var previews: some View {
+    AddView()
+  }
+ }
 
 struct TextExWidthKey: PreferenceKey {
   static var defaultValue: CGFloat = 0

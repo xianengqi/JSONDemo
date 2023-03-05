@@ -26,7 +26,7 @@
 		C3C43531299FA01100ACE9D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C43530299FA01100ACE9D1 /* Preview Assets.xcassets */; };
 		C3C4353B299FA18600ACE9D1 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4353A299FA18600ACE9D1 /* JSONManager.swift */; };
 		C3C4353D299FA74400ACE9D1 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C4353C299FA74400ACE9D1 /* example.json */; };
-		C3C4353F299FA81600ACE9D1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4353E299FA81600ACE9D1 /* DetailView.swift */; };
+		C3C4353F299FA81600ACE9D1 /* DetailViewSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4353E299FA81600ACE9D1 /* DetailViewSample.swift */; };
 		C3C4354229A237A000ACE9D1 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3C4354029A237A000ACE9D1 /* Model.xcdatamodeld */; };
 		C3C4354429A23AD200ACE9D1 /* CoredataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4354329A23AD200ACE9D1 /* CoredataStack.swift */; };
 		C3C4354629A247A500ACE9D1 /* OneToOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4354529A247A500ACE9D1 /* OneToOneView.swift */; };
@@ -34,6 +34,8 @@
 		C3C4355229A2546300ACE9D1 /* OneToMany.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4355129A2546300ACE9D1 /* OneToMany.swift */; };
 		C3C4355429A25CCA00ACE9D1 /* StudentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4355329A25CCA00ACE9D1 /* StudentsList.swift */; };
 		C3C4355629A25D0D00ACE9D1 /* OneToOneSearchSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4355529A25D0D00ACE9D1 /* OneToOneSearchSort.swift */; };
+		C3CABFAF29B45066004E9CDD /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CABFAE29B45066004E9CDD /* DetailView.swift */; };
+		C3CABFB129B46463004E9CDD /* ExampleGeomery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CABFB029B46463004E9CDD /* ExampleGeomery.swift */; };
 		C3CFC3E029ACF88C00148522 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = C3CFC3DF29ACF88C00148522 /* Flow */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +60,7 @@
 		C3C43530299FA01100ACE9D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C3C4353A299FA18600ACE9D1 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		C3C4353C299FA74400ACE9D1 /* example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
-		C3C4353E299FA81600ACE9D1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C3C4353E299FA81600ACE9D1 /* DetailViewSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewSample.swift; sourceTree = "<group>"; };
 		C3C4354129A237A000ACE9D1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C3C4354329A23AD200ACE9D1 /* CoredataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataStack.swift; sourceTree = "<group>"; };
 		C3C4354529A247A500ACE9D1 /* OneToOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToOneView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,8 @@
 		C3C4355129A2546300ACE9D1 /* OneToMany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToMany.swift; sourceTree = "<group>"; };
 		C3C4355329A25CCA00ACE9D1 /* StudentsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsList.swift; sourceTree = "<group>"; };
 		C3C4355529A25D0D00ACE9D1 /* OneToOneSearchSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToOneSearchSort.swift; sourceTree = "<group>"; };
+		C3CABFAE29B45066004E9CDD /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C3CABFB029B46463004E9CDD /* ExampleGeomery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleGeomery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 			children = (
 				C3B45A4829A62EBD00D4153F /* TestSample.swift */,
 				C3B3B1F529ACB63F00CA5663 /* AddView.swift */,
+				C3CABFAE29B45066004E9CDD /* DetailView.swift */,
 				C3B3B1EB29AA272400CA5663 /* FilteredList.swift */,
 				C3B3B1E629A8E25600CA5663 /* Sorting.swift */,
 				C31A414129A7917400D30595 /* AddSkuView.swift */,
@@ -98,6 +103,7 @@
 			children = (
 				C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */,
 				C3B3B20329ACE3BE00CA5663 /* FirstExample.swift */,
+				C3CABFB029B46463004E9CDD /* ExampleGeomery.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -138,7 +144,7 @@
 				C3B3B1E829AA171700CA5663 /* Example */,
 				C3B3B1E329A8DC2800CA5663 /* SkuView */,
 				C3C4355329A25CCA00ACE9D1 /* StudentsList.swift */,
-				C3C4353E299FA81600ACE9D1 /* DetailView.swift */,
+				C3C4353E299FA81600ACE9D1 /* DetailViewSample.swift */,
 				C3C43537299FA11100ACE9D1 /* Model */,
 				C3C4352D299FA01100ACE9D1 /* Assets.xcassets */,
 				C3C4352F299FA01100ACE9D1 /* Preview Content */,
@@ -251,16 +257,18 @@
 				C3C4353B299FA18600ACE9D1 /* JSONManager.swift in Sources */,
 				C3418F8F29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */,
 				C31A414229A7917400D30595 /* AddSkuView.swift in Sources */,
-				C3C4353F299FA81600ACE9D1 /* DetailView.swift in Sources */,
+				C3C4353F299FA81600ACE9D1 /* DetailViewSample.swift in Sources */,
 				C3B3B1F329AA29E200CA5663 /* Sku+CoreDataClass.swift in Sources */,
 				C3B3B1EA29AA174300CA5663 /* PredicateViewDemo.swift in Sources */,
 				C3C4354229A237A000ACE9D1 /* Model.xcdatamodeld in Sources */,
+				C3CABFAF29B45066004E9CDD /* DetailView.swift in Sources */,
 				C3C4354829A2480700ACE9D1 /* RegistSampleData.swift in Sources */,
 				C3B45A4929A62EBD00D4153F /* TestSample.swift in Sources */,
 				C3C4352C299FA01000ACE9D1 /* ContentView.swift in Sources */,
 				C3C4355429A25CCA00ACE9D1 /* StudentsList.swift in Sources */,
 				C3C4352A299FA01000ACE9D1 /* JSONDemoApp.swift in Sources */,
 				C3B3B1E729A8E25600CA5663 /* Sorting.swift in Sources */,
+				C3CABFB129B46463004E9CDD /* ExampleGeomery.swift in Sources */,
 				C3418F9129B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */,
 				C3B3B1F629ACB63F00CA5663 /* AddView.swift in Sources */,
 				C3C4354629A247A500ACE9D1 /* OneToOneView.swift in Sources */,

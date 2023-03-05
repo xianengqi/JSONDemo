@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailView: View {
+struct DetailViewSample: View {
   func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     var dict = [Int: Int]()
     for (index, num) in nums.enumerated() {
@@ -36,9 +36,9 @@ struct DetailView: View {
   }
 }
 
-struct DetailView_Previews: PreviewProvider {
+struct DetailViewSample_Previews: PreviewProvider {
   static var previews: some View {
-    DetailView(person: Person.samplePerson)
+    DetailViewSample(person: Person.samplePerson)
   }
 }
 

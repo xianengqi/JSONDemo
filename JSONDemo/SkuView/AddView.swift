@@ -17,33 +17,41 @@ struct AddView: View {
   @State private var selectedColors: [String] = []
   @State var showColor = false
   @State var showSize = false
+  @State private var isSaved = false
 
   var body: some View {
-    ZStack {
-      // 设置全局颜色
-      Color(.white)
-        .ignoresSafeArea()
+    NavigationStack {
+      ZStack {
+        // 设置全局颜色
+        Color(.white)
+          .ignoresSafeArea()
 
-      VStack(spacing: 0) {
-        formColorView()
-          .frame(height: 20)
-          .padding()
-        Spacer()
-
-        Button(action: {
-          saveColors()
-        }, label: {
-          Text("保存")
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .frame(height: 40)
-            .background(.blue)
-            .cornerRadius(6)
+        VStack(spacing: 0) {
+          formColorView()
+            .frame(height: 20)
             .padding()
-        })
-      }
+          Spacer()
 
-      .padding()
+          Button(action: {
+            //
+          }, label: {
+            // Navigation link to DetailView
+            NavigationLink(destination: DetailView(colors: selectedColors)) {
+              Text("保存")
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(height: 40)
+                .background(.blue)
+                .cornerRadius(6)
+                .padding()
+                .opacity(selectedColors.isEmpty ? 0.5 : 1.0)
+                .disabled(selectedColors.isEmpty)
+            }
+          })
+        }
+
+        .padding()
+      }
     }
   }
 
@@ -128,15 +136,19 @@ struct AddView: View {
   }
 
   private func saveColors() {
+    // 把从ColorView里选择的颜色保存到AddView里面的数组
+
     // 在CoreData中创建一个新的颜色对象
+    let colorNames = selectedColors.map { String($0) }
     let newColor = ColorEntity(context: viewContext)
-    // 设置颜色的属性
-    newColor.colors = selectedColors
-    // 将颜色保存到CoreData中
+    newColor.colors = newColor.colors
+    newColor.colors.append(contentsOf: colorNames)
     do {
       try viewContext.save()
+      isSaved = true
     } catch {
-      print("Error saving colors: (error)")
+      let nsError = error as NSError
+      fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
     }
   }
 }
@@ -149,8 +161,8 @@ struct ColorView: View {
   @State private var showingAlert = false
   @State private var deleteAlert = false
   @State private var name = ""
-  // 声明一个保存所选颜色的数组
-  @State private var selectedColors222: [String] = []
+  @State private var deleteIndex: Int?
+  @State private var colors333: [String] = []
   // 创建一个空数组，然后把name里的值保存到空数组里面
   @State private var colors222: [ColorEntity] = []
 
@@ -159,7 +171,15 @@ struct ColorView: View {
     sortDescriptors: [NSSortDescriptor(keyPath: \ColorEntity.createdAt, ascending: true)]
   ) var colors: FetchedResults<ColorEntity>
 
+  @FetchRequest(
+    entity: ColorEntity.entity(),
+    sortDescriptors: [NSSortDescriptor(keyPath: \ColorEntity.createdAt, ascending: true)],
+    animation: .default
+  )
+  private var colorsFetchRequest: FetchedResults<ColorEntity>
+
   private func submit() {
+ 
     // 把颜色添加进来
     let newColor = ColorEntity(context: viewContext)
     newColor.colors = [name]
@@ -171,24 +191,11 @@ struct ColorView: View {
     } catch {
       print("Error saving color: \(error.localizedDescription)")
     }
-
     // 清空颜色
     name = ""
     print("You entered \(name)")
     print("You entered \(colors)")
   }
-
-//  // 创建一个空数组，然后把name里的值保存到空数组里面
-//  @State private var colors: [String] = []
-//
-//  private func submit() {
-//    // 把颜色添加进来
-//    colors.append(name)
-//    // 清空颜色
-//    name = ""
-//    print("You entered \(name)")
-//    print("You entered \(colors)")
-//  }
 
   var body: some View {
     ZStack {
@@ -232,106 +239,97 @@ struct ColorView: View {
 
   @ViewBuilder
   private func content() -> some View {
+    // 声明一个字符串变量，用于保存颜色名称
+//       var colorName = ""
+
     HFlow(itemSpacing: 10, rowSpacing: 10) {
       // 循环显示颜色
       ForEach(colors, id: \.self) { color in
 
-//        Text(color.colors.joined(separator: ", "))
-//          .foregroundColor(.black)
-//          .padding()
-//          .frame(height: 30)
-//          .contentShape(Rectangle())
-//          .overlay(
-//            RoundedRectangle(cornerRadius: 4)
-//
-//              .strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1))
-//              .opacity(0.5)
-        ////              .frame(width: 80, height: 30)
-//          )
-        ZStack {
-          // 显示颜色
-          // 给Text添加外框
-          RoundedRectangle(cornerRadius: 4)
-            .strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1))
-            .opacity(0.5)
-            .frame(width: 80, height: 30)
-         
-          Text(color.colors.joined(separator: ", "))
-            .foregroundColor(.black)
-            .font(.system(size: 12))
-            .frame(height: 30)
-            .contentShape(Rectangle())
-          
-          // 如果颜色已经被选择，则为其添加一个红色勾号
-          if color.isSelected {
-            RoundedRectangle(cornerRadius: 4)
-              .strokeBorder(Color.red, style: StrokeStyle(lineWidth: 1))
-              .opacity(0.5)
-              .frame(width: 80, height: 30)
+//        colorName = color
 
-            // 给Image添加红色圆角
-            RoundedRectangle(cornerRadius: 4)
-              .fill(Color.orange)
-              .frame(width: 10, height: 10)
-              .offset(x: 35, y: 10)
-            
-            Image(systemName: "checkmark")
-              .resizable()
-              .foregroundColor(.white)
-              .frame(width: 8, height: 6)
-              .offset(x: 35, y: 10)
-            
-          }
-         
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-          // 如果颜色已经被选择，则从selectedColors数组中删除它；否则，将其添加到数组中
-          if selectedColors.contains(color.colors) {
-            selectedColors.removeAll(where: { $0 == color.colors.first })
-            color.isSelected = false
-          } else {
-            selectedColors.append(contentsOf: color.colors)
-            color.isSelected = true
-          }
-          do {
-            try viewContext.save()
-          } catch {
-            print("Error saving color: \(error.localizedDescription)")
-          }
+        Text(color.colors.joined(separator: ", "))
+          .foregroundColor(.black)
+          .padding()
+          .frame(height: 30)
+          .contentShape(Rectangle())
+          .overlay(
+            ZStack(alignment: .bottomTrailing) {
+              GeometryReader { geometry in
+                Color.clear
+                  .preference(key: TextExWidthKey.self, value: geometry.size.width)
+              }
+
+              if color.isSelected {
+                // 给image加上红色圆圈
+
+                ZStack {
+                  // 打勾时，出现红色圆圈
+                  Circle()
+                    .foregroundColor(.red)
+                    .frame(height: 10)
+
+                  // 让image出现在红色圆圈上面
+                  Image(systemName: "checkmark")
+                    .resizable()
+                    .foregroundColor(.white)
+                    .frame(width: 8, height: 6)
+
+                }.offset(x: 0, y: 0)
+              }
+
+              RoundedRectangle(cornerRadius: 4)
+
+                .strokeBorder(color.isSelected ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
+                .opacity(0.5)
+            }
+          )
+          // 把选中的勾宽度随着文字宽度放在右下角
+
+          .contentShape(Rectangle())
+          .onTapGesture {
+            // 如果颜色已经被选择，则从selectedColors数组中删除它；否则，将其添加到数组中
+            if color.colors.allSatisfy({ selectedColors.contains($0) }) {
+              selectedColors.removeAll(where: { $0 == color.colors.first })
+              color.isSelected = false
+            } else {
+              selectedColors.append(contentsOf: color.colors)
+              color.isSelected = true
+            }
+            do {
+              try viewContext.save()
+            } catch {
+              print("Error saving color: \(error.localizedDescription)")
+            }
 //          if color.colors.allSatisfy({ selectedColors222.contains($0) }) {
 //            selectedColors222.removeAll(where: { $0 == color.colors.first })
 //          } else {
 //            selectedColors222.append(contentsOf: color.colors)
 //          }
-        }
+          }
 
-        // 长按弹出提示删除框
-        .onLongPressGesture {
-//            colors.remove(at: colors.firstIndex(of: color)!)
-          
-          deleteAlert = true
+          // 长按弹出提示删除框
+          .onLongPressGesture {
+            // 我想让它比弹窗慢些显示删除
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+              if let index = colors.firstIndex(of: color) {
+                let colorEntity = colorsFetchRequest[index]
+
+                viewContext.delete(colorEntity)
+                try? viewContext.save()
+              }
+            }
+
+            deleteAlert = true
+
 //            print("长按删除\(colors)")
-        }
-        .alert("删除颜色", isPresented: $deleteAlert) {
-          Button("确认删除") {
-            // 从CoreData中删除颜色
-            viewContext.delete(color)
-
-            // 从colors数组中删除颜色
-            colors222.removeAll(where: { $0 == color })
-
-            // 从selectedColors数组中删除颜色
-            selectedColors.removeAll(where: { $0 == color.colors.first ?? "" })
-
-            do {
-              try viewContext.save()
-            } catch {
-              print("Error deleting color: \(error)")
+          }
+          .alert("删除颜色", isPresented: $deleteAlert) {
+            Button("确认删除") {
+              // 显示删除的名称
+//              print("删除\(colorName)")
             }
           }
-          Button("取消", role: .cancel) {}
-        }
       }
 
       Text("新增颜色")
@@ -405,11 +403,18 @@ struct SizeView: View {
   }
 }
 
-@available(iOS 16.4, *)
-struct AddView_Previews: PreviewProvider {
-  static var previews: some View {
-    
-    AddView()
-  
+// @available(iOS 16.4, *)
+// struct AddView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    AddView()
+//  }
+// }
+
+struct TextExWidthKey: PreferenceKey {
+  static var defaultValue: CGFloat = 0
+
+  static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+    value = max(value, nextValue())
   }
 }
+

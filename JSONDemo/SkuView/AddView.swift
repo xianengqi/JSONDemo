@@ -9,11 +9,21 @@ import CoreData
 import Flow
 import SwiftUI
 
+class SelectedColors: ObservableObject {
+  @Published var colors: [String] = []
+}
+
 // 点击颜色， 用Sheet显示
 // 点击尺码, 用Sheet显示
 @available(iOS 16.4, *)
 struct AddView: View {
   @Environment(\.managedObjectContext) private var viewContext
+  @FetchRequest(
+    entity: ColorEntity.entity(),
+    sortDescriptors: [NSSortDescriptor(keyPath: \ColorEntity.createdAt, ascending: true)],
+    animation: .default
+  )
+  private var colorsFetchRequest: FetchedResults<ColorEntity>
   @State private var selectedColors: [String] = []
   @State var showColor = false
   @State var showSize = false
@@ -33,7 +43,9 @@ struct AddView: View {
           Spacer()
 
           Button(action: {
-            //
+            // 这里写保存到CoreData的逻辑
+//            saveColors()
+//            selectedColors = []
           }, label: {
             // Navigation link to DetailView
             NavigationLink(destination: DetailView(colors: selectedColors)) {
@@ -83,12 +95,25 @@ struct AddView: View {
     .contentShape(Rectangle())
 
     .onTapGesture {
+      print("点击弹出Sheet")
+      // 在打开Sheet之前先将已选中的颜色状态清空
+      selectedColors = []
       showColor = true
+//      let isSelected = selectedColors.contains(color.colors)
+//      isSelected = false
+      // 清空选中的颜色状态
+//      selectedColors.removeAll()
     }
 
     .sheet(isPresented: $showColor) {
       ColorView(selectedColors: $selectedColors)
-        .environment(\.managedObjectContext, viewContext)
+        .onAppear {
+          // 清空选中的颜色状态
+          print("生命zhou")
+          selectedColors.removeAll()
+          // 把 isSelected状态设置为flase
+        }
+//        .environment(\.managedObjectContext, viewContext)
         .presentationDetents(
           [.medium])
         .presentationBackground(.ultraThinMaterial)
@@ -158,6 +183,10 @@ struct ColorView: View {
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.presentationMode) private var presentationMode
   @Binding var selectedColors: [String]
+//  @Binding var sheetSelected: Bool
+
+//  @State private var selectedColors = [String]()
+
   @State private var phase = 0.0
   @State private var showingAlert = false
   @State private var deleteAlert = false
@@ -165,8 +194,11 @@ struct ColorView: View {
   @State private var name = ""
   @State private var deleteIndex: Int?
   @State private var colors333: [String] = []
+//  @State private var isSelectionColor: Bool = false
   // 创建一个空数组，然后把name里的值保存到空数组里面
   @State private var colors222: [ColorEntity] = []
+
+  @State private var isAppFirstLaunch: Bool = true
 
   @FetchRequest(
     entity: ColorEntity.entity(),
@@ -181,11 +213,10 @@ struct ColorView: View {
   private var colorsFetchRequest: FetchedResults<ColorEntity>
 
   private func submit() {
- 
     // 把颜色添加进来
     let newColor = ColorEntity(context: viewContext)
     newColor.colors = [name]
-//    newColor.isSelected = false
+    newColor.isSelected = false
     colors222.append(newColor)
 
     do {
@@ -240,16 +271,15 @@ struct ColorView: View {
 //      .frame(height: 70)
   }
 
+  @State private var colorsSelected: Set<String> = []
+
   @ViewBuilder
   private func content() -> some View {
-    // 声明一个字符串变量，用于保存颜色名称
-//       var colorName = ""
-
     HFlow(itemSpacing: 10, rowSpacing: 10) {
       // 循环显示颜色
       ForEach(colors, id: \.self) { color in
 
-//        colorName = color
+//        let isSelected = selectedColors.contains(color.colors)
 
         Text(color.colors.joined(separator: ", "))
           .foregroundColor(.black)
@@ -263,9 +293,7 @@ struct ColorView: View {
                   .preference(key: TextExWidthKey.self, value: geometry.size.width)
               }
 
-              if isSelectedColor {
-                // 给image加上红色圆圈
-
+              if color.colors.allSatisfy({ selectedColors.contains($0) }) {
                 ZStack {
                   // 打勾时，出现红色圆圈
                   Circle()
@@ -279,35 +307,46 @@ struct ColorView: View {
                     .frame(width: 8, height: 6)
 
                 }.offset(x: 0, y: 0)
+              } else {
+//                Image(systemName: "square")
+//                  .foregroundColor(.black)
               }
+
+              //              Text(color.colors)
+              //                .foregroundColor(.black)
 
               RoundedRectangle(cornerRadius: 4)
 
-                .strokeBorder(isSelectedColor ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
+                .strokeBorder(color.colors.allSatisfy({ selectedColors.contains($0) }) ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
                 .opacity(0.5)
             }
           )
           // 把选中的勾宽度随着文字宽度放在右下角
 
           .contentShape(Rectangle())
+
+          .onAppear {
+            // 清空选中的颜色状态
+            print("content：生命周期初始化")
+            //            selectedColors.removeAll()
+          }
           .onTapGesture {
             // 如果颜色已经被选择，则从selectedColors数组中删除它；否则，将其添加到数组中
             if color.colors.allSatisfy({ selectedColors.contains($0) }) {
               selectedColors.removeAll(where: { $0 == color.colors.first })
-              isSelectedColor = false
+//              color.isSelected = false
             } else {
               selectedColors.append(contentsOf: color.colors)
-              isSelectedColor = true
+//              color.isSelected = true
             }
             do {
               try viewContext.save()
             } catch {
               print("Error saving color: \(error.localizedDescription)")
             }
-
           }
 
-          // 长按弹出提示删除框
+//         长按弹出提示删除框
           .onLongPressGesture {
             // 我想让它比弹窗慢些显示删除
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -321,12 +360,12 @@ struct ColorView: View {
 
             deleteAlert = true
 
-//            print("长按删除\(colors)")
+            //            print("长按删除\(colors)")
           }
           .alert("删除颜色", isPresented: $deleteAlert) {
             Button("确认删除") {
               // 显示删除的名称
-//              print("删除\(colorName)")
+              //              print("删除\(colorName)")
             }
           }
       }
@@ -403,12 +442,12 @@ struct SizeView: View {
   }
 }
 
- @available(iOS 16.4, *)
- struct AddView_Previews: PreviewProvider {
+@available(iOS 16.4, *)
+struct AddView_Previews: PreviewProvider {
   static var previews: some View {
     AddView()
   }
- }
+}
 
 struct TextExWidthKey: PreferenceKey {
   static var defaultValue: CGFloat = 0
@@ -418,3 +457,10 @@ struct TextExWidthKey: PreferenceKey {
   }
 }
 
+// class SelectionManager: ObservableObject {
+//  @Published var selectedColors: [String] = []
+//
+//  func reset() {
+//    selectedColors = []
+//  }
+// }

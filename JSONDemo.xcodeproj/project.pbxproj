@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C31A414229A7917400D30595 /* AddSkuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31A414129A7917400D30595 /* AddSkuView.swift */; };
+		C33F9E1A29B60DC400C542F8 /* SelectedExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33F9E1929B60DC400C542F8 /* SelectedExample.swift */; };
 		C3418F8E29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F8C29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift */; };
 		C3418F8F29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F8D29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift */; };
 		C3418F9129B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F9029B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift */; };
@@ -36,11 +37,13 @@
 		C3C4355629A25D0D00ACE9D1 /* OneToOneSearchSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C4355529A25D0D00ACE9D1 /* OneToOneSearchSort.swift */; };
 		C3CABFAF29B45066004E9CDD /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CABFAE29B45066004E9CDD /* DetailView.swift */; };
 		C3CABFB129B46463004E9CDD /* ExampleGeomery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CABFB029B46463004E9CDD /* ExampleGeomery.swift */; };
+		C3CABFB729B4EB97004E9CDD /* ColorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CABFB629B4EB97004E9CDD /* ColorListView.swift */; };
 		C3CFC3E029ACF88C00148522 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = C3CFC3DF29ACF88C00148522 /* Flow */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C31A414129A7917400D30595 /* AddSkuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSkuView.swift; sourceTree = "<group>"; };
+		C33F9E1929B60DC400C542F8 /* SelectedExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedExample.swift; sourceTree = "<group>"; };
 		C3418F8C29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C3418F8D29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C3418F9029B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ColorEntity+CoreDataProperties.swift"; path = "JSONDemo/Model/ColorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 		C3C4355529A25D0D00ACE9D1 /* OneToOneSearchSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToOneSearchSort.swift; sourceTree = "<group>"; };
 		C3CABFAE29B45066004E9CDD /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		C3CABFB029B46463004E9CDD /* ExampleGeomery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleGeomery.swift; sourceTree = "<group>"; };
+		C3CABFB629B4EB97004E9CDD /* ColorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 			children = (
 				C3B45A4829A62EBD00D4153F /* TestSample.swift */,
 				C3B3B1F529ACB63F00CA5663 /* AddView.swift */,
+				C3CABFB629B4EB97004E9CDD /* ColorListView.swift */,
 				C3CABFAE29B45066004E9CDD /* DetailView.swift */,
 				C3B3B1EB29AA272400CA5663 /* FilteredList.swift */,
 				C3B3B1E629A8E25600CA5663 /* Sorting.swift */,
@@ -103,6 +108,7 @@
 			children = (
 				C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */,
 				C3B3B20329ACE3BE00CA5663 /* FirstExample.swift */,
+				C33F9E1929B60DC400C542F8 /* SelectedExample.swift */,
 				C3CABFB029B46463004E9CDD /* ExampleGeomery.swift */,
 			);
 			path = Example;
@@ -255,6 +261,7 @@
 			files = (
 				C3418F8E29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift in Sources */,
 				C3C4353B299FA18600ACE9D1 /* JSONManager.swift in Sources */,
+				C3CABFB729B4EB97004E9CDD /* ColorListView.swift in Sources */,
 				C3418F8F29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */,
 				C31A414229A7917400D30595 /* AddSkuView.swift in Sources */,
 				C3C4353F299FA81600ACE9D1 /* DetailViewSample.swift in Sources */,
@@ -277,6 +284,7 @@
 				C3B3B20429ACE3BE00CA5663 /* FirstExample.swift in Sources */,
 				C3C4355229A2546300ACE9D1 /* OneToMany.swift in Sources */,
 				C3B3B1EC29AA272400CA5663 /* FilteredList.swift in Sources */,
+				C33F9E1A29B60DC400C542F8 /* SelectedExample.swift in Sources */,
 				C3B3B1F429AA29E200CA5663 /* Sku+CoreDataProperties.swift in Sources */,
 				C3C4354429A23AD200ACE9D1 /* CoredataStack.swift in Sources */,
 			);

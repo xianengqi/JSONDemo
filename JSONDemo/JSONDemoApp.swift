@@ -10,20 +10,23 @@ import SwiftUI
 @available(iOS 16.4, *)
 @main
 struct JSONDemoApp: App {
-  
 //  let persistenceController = PersistenceController.shared
-  
+
   @StateObject private var coredataStack = CoreDataStack()
-  
-    var body: some Scene {
-        WindowGroup {
+
+  var body: some Scene {
+    WindowGroup {
 //            ContentView()
 //          OneToOneSearchSort()
 //          OneToMany()
 //          OneToOneView()
 //          ProductStockView()
-          AddView()
-            .environment(\.managedObjectContext, coredataStack.container.viewContext)
-        }
+      AddView()
+        .environment(\.managedObjectContext, coredataStack.container.viewContext)
     }
+  }
 }
+
+// extension UserDefaults {
+//  static let selectedColorsKey = "SelectedColors"
+// }

@@ -11,6 +11,10 @@
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="selectedColors" optional="YES" attributeType="Transformable"/>
     </entity>
+    <entity name="ColorSelection" representedClassName="ColorSelection" syncable="YES" codeGenerationType="class">
+        <attribute name="colors" optional="YES" attributeType="Transformable"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
     <entity name="ProductEntity" representedClassName="ProductEntity" syncable="YES" codeGenerationType="class">
         <attribute name="descriptionText" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>

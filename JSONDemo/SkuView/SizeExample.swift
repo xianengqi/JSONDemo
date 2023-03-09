@@ -101,6 +101,21 @@ struct SizeExample: View {
   }
   
   @State private var colorsSelected: Set<String> = []
+  @State private var longPressIndex: Int?
+  // 在ForEach中添加一个绑定状态变量用于跟踪删除选项
+  @State private var deletingIndex: Int?
+  
+  private func deleteColor(at index: Int) {
+    if let sizeToDelete = colors[index].sizeClothes.first {
+      let color = colors.first(where: { $0.sizeClothes.contains(sizeToDelete) == true })!
+      viewContext.delete(color)
+      do {
+        try viewContext.save()
+      } catch {
+        print("Error saving context: \(error.localizedDescription)")
+      }
+    }
+  }
   
   @ViewBuilder
   private func content() -> some View {
@@ -109,7 +124,7 @@ struct SizeExample: View {
 //      let sizes = Array(Set(colors.compactMap { $0.sizeClothes }.flatMap { $0 }))
 
       ForEach(colors.indices, id: \.self) { colorEntiy in
-        if let sizeClothes: [String]?  = colors[colorEntiy].sizeClothes {
+        if let sizeClothes: [String]? = colors[colorEntiy].sizeClothes {
           ForEach(sizeClothes ?? [], id: \.self) { size in
             Text(size)
               .foregroundColor(.black)
@@ -179,25 +194,22 @@ struct SizeExample: View {
             
               //         长按弹出提示删除框
               .onLongPressGesture {
-                // 我想让它比弹窗慢些显示删除
-              
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                  if let index = colors.firstIndex(where: { $0.sizeClothes.contains(size) }) {
-                    let colorEntity = colorsFetchRequest[index]
-                    deleteIndex = index
-                    deleteAlert = true
-                  }
+                if let color = colors.first(where: { $0.sizeClothes.contains(size) == true }) {
+                  deleteIndex = colors.firstIndex(of: color)
+                  deleteAlert = true
                 }
-
-                deleteAlert = true
-
-                //            print("长按删除\(colors)")
               }
-              .alert("删除尺码", isPresented: $deleteAlert) {
-                Button("确认删除") {
-                  // 显示删除的名称
-                  //              print("删除\(colorName)")
-                }
+            
+              .alert(isPresented: $deleteAlert) {
+                let sizeToDelete = colors[deleteIndex!].sizeClothes.first!
+                return Alert(
+                  title: Text("确定要删除 \(sizeToDelete) 吗？"),
+                  primaryButton: .destructive(Text("删除"), action: {
+                    // 调用删除操作函数来删除选定的颜色
+                    deleteColor(at: deleteIndex!)
+                  }),
+                  secondaryButton: .cancel(Text("取消"))
+                )
               }
           }
         }

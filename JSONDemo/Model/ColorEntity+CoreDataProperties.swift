@@ -22,3 +22,14 @@ public extension ColorEntity {
 }
 
 extension ColorEntity: Identifiable {}
+
+extension ColorEntity {
+  func removeFromSizeClothes(at index: Int) {
+    var sizes = sizeClothes 
+    sizes.remove(at: index)
+    sizeClothes = sizes
+
+    willChangeValue(forKey: "sizeClothes")
+    didChangeValue(forKey: "sizeClothes")
+  }
+}

@@ -156,7 +156,7 @@ struct AddView: View {
         .onAppear {
           // 清空选中的颜色状态
           print("生命zhou")
-          selectedColors.removeAll()
+          selectedSizes.removeAll()
           // 把 isSelected状态设置为flase
         }
         .presentationDetents(

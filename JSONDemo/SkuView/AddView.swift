@@ -25,6 +25,7 @@ struct AddView: View {
   )
   private var colorsFetchRequest: FetchedResults<ColorEntity>
   @State private var selectedColors: [String] = []
+  @State private var selectedSizes: [String] = []
   @State var showColor = false
   @State var showSize = false
   @State private var isSaved = false
@@ -127,10 +128,10 @@ struct AddView: View {
         Text("尺码")
           .foregroundColor(.black)
           .frame(maxWidth: .infinity, alignment: .leading)
-      }
+      }.frame(width: 40)
 
       Color.clear.overlay {
-        Text("选择尺码")
+        Text(selectedSizes.isEmpty ? "选择尺码" : "\(selectedSizes.joined(separator: ", "))")
           .foregroundColor(.black)
           .opacity(0.7)
           .frame(maxWidth: .infinity, alignment: .center)
@@ -141,7 +142,7 @@ struct AddView: View {
           .foregroundColor(.black)
           .opacity(0.7)
           .frame(maxWidth: .infinity, alignment: .trailing)
-      }
+      }.frame(width: 10)
     }
     // 整行点击状态
     .contentShape(Rectangle())
@@ -151,7 +152,13 @@ struct AddView: View {
     }
 
     .sheet(isPresented: $showSize) {
-      SizeView()
+      SizeExample(selectedColors: $selectedSizes)
+        .onAppear {
+          // 清空选中的颜色状态
+          print("生命zhou")
+          selectedColors.removeAll()
+          // 把 isSelected状态设置为flase
+        }
         .presentationDetents(
           [.medium])
         .presentationBackground(.ultraThinMaterial)
@@ -161,22 +168,22 @@ struct AddView: View {
     }
   }
 
-  private func saveColors() {
-    // 把从ColorView里选择的颜色保存到AddView里面的数组
-
-    // 在CoreData中创建一个新的颜色对象
-    let colorNames = selectedColors.map { String($0) }
-    let newColor = ColorEntity(context: viewContext)
-    newColor.colors = newColor.colors
-    newColor.colors.append(contentsOf: colorNames)
-    do {
-      try viewContext.save()
-      isSaved = true
-    } catch {
-      let nsError = error as NSError
-      fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-    }
-  }
+//  private func saveColors() {
+//    // 把从ColorView里选择的颜色保存到AddView里面的数组
+//
+//    // 在CoreData中创建一个新的颜色对象
+//    let colorNames = selectedColors.map { String($0) }
+//    let newColor = ColorEntity(context: viewContext)
+//    newColor.colors = newColor.colors
+//    newColor.colors.append(contentsOf: colorNames)
+//    do {
+//      try viewContext.save()
+//      isSaved = true
+//    } catch {
+//      let nsError = error as NSError
+//      fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//    }
+//  }
 }
 
 struct ColorView: View {
@@ -192,6 +199,7 @@ struct ColorView: View {
   @State private var deleteAlert = false
   @State private var isSelectedColor = false
   @State private var name = ""
+  @State private var sizeClothes = ""
   @State private var deleteIndex: Int?
   @State private var colors333: [String] = []
 //  @State private var isSelectionColor: Bool = false
@@ -216,7 +224,6 @@ struct ColorView: View {
     // 把颜色添加进来
     let newColor = ColorEntity(context: viewContext)
     newColor.colors = [name]
-    newColor.isSelected = false
     colors222.append(newColor)
 
     do {
@@ -279,8 +286,7 @@ struct ColorView: View {
       // 循环显示颜色
       ForEach(colors, id: \.self) { color in
 
-//        let isSelected = selectedColors.contains(color.colors)
-
+        
         Text(color.colors.joined(separator: ", "))
           .foregroundColor(.black)
           .padding()
@@ -317,7 +323,7 @@ struct ColorView: View {
 
               RoundedRectangle(cornerRadius: 4)
 
-                .strokeBorder(color.colors.allSatisfy({ selectedColors.contains($0) }) ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
+                .strokeBorder(color.colors.allSatisfy { selectedColors.contains($0) } ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
                 .opacity(0.5)
             }
           )
@@ -334,10 +340,9 @@ struct ColorView: View {
             // 如果颜色已经被选择，则从selectedColors数组中删除它；否则，将其添加到数组中
             if color.colors.allSatisfy({ selectedColors.contains($0) }) {
               selectedColors.removeAll(where: { $0 == color.colors.first })
-//              color.isSelected = false
             } else {
               selectedColors.append(contentsOf: color.colors)
-//              color.isSelected = true
+
             }
             do {
               try viewContext.save()
@@ -420,20 +425,20 @@ struct ColorView: View {
     }
   }
 
-  private func addColor() {
-    // 在CoreData中创建一个新的颜色对象
-    let newColor = ColorEntity(context: viewContext)
-    // 设置颜色的属性
-    newColor.colors = [name]
-    // 将颜色保存到CoreData中
-    do {
-      try viewContext.save()
-    } catch {
-      print("Error saving color: (error)")
-    }
-    name = ""
-    showingAlert = false
-  }
+//  private func addColor() {
+//    // 在CoreData中创建一个新的颜色对象
+//    let newColor = ColorEntity(context: viewContext)
+//    // 设置颜色的属性
+//    newColor.colors = [name]
+//    // 将颜色保存到CoreData中
+//    do {
+//      try viewContext.save()
+//    } catch {
+//      print("Error saving color: (error)")
+//    }
+//    name = ""
+//    showingAlert = false
+//  }
 }
 
 struct SizeView: View {

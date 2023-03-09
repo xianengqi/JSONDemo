@@ -6,22 +6,19 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
+public extension ColorEntity {
+  @nonobjc class func fetchRequest() -> NSFetchRequest<ColorEntity> {
+    return NSFetchRequest<ColorEntity>(entityName: "ColorEntity")
+  }
 
-extension ColorEntity {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<ColorEntity> {
-        return NSFetchRequest<ColorEntity>(entityName: "ColorEntity")
-    }
-
-    @NSManaged public var colors: [String]
-    @NSManaged public var createdAt: Date?
-    @NSManaged public var selectedColors: NSArray?
-    @NSManaged public var isSelected: Bool
+  @NSManaged var colors: [String]
+  @NSManaged var sizeClothes: [String]
+  @NSManaged var createdAt: Date?
+  @NSManaged var selectedColors: NSArray?
+  @NSManaged var isSelected: Bool
 }
 
-extension ColorEntity : Identifiable {
-
-}
+extension ColorEntity: Identifiable {}

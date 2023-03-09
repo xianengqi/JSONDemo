@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		C31A414229A7917400D30595 /* AddSkuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31A414129A7917400D30595 /* AddSkuView.swift */; };
 		C33F9E1A29B60DC400C542F8 /* SelectedExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33F9E1929B60DC400C542F8 /* SelectedExample.swift */; };
+		C33F9E1C29B6EF0C00C542F8 /* SelectedExample2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33F9E1B29B6EF0C00C542F8 /* SelectedExample2.swift */; };
 		C3418F8E29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F8C29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift */; };
 		C3418F8F29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F8D29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift */; };
 		C3418F9129B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3418F9029B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift */; };
+		C35E7B9529B9FB220014B64E /* SizeViewClothes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35E7B9429B9FB220014B64E /* SizeViewClothes.swift */; };
+		C35E7B9729BA0EA50014B64E /* SizeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35E7B9629BA0EA50014B64E /* SizeExample.swift */; };
 		C3B3B1E529A8DC4200CA5663 /* EditSkuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1E429A8DC4200CA5663 /* EditSkuView.swift */; };
 		C3B3B1E729A8E25600CA5663 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1E629A8E25600CA5663 /* Sorting.swift */; };
 		C3B3B1EA29AA174300CA5663 /* PredicateViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */; };
@@ -44,9 +47,12 @@
 /* Begin PBXFileReference section */
 		C31A414129A7917400D30595 /* AddSkuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSkuView.swift; sourceTree = "<group>"; };
 		C33F9E1929B60DC400C542F8 /* SelectedExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedExample.swift; sourceTree = "<group>"; };
+		C33F9E1B29B6EF0C00C542F8 /* SelectedExample2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedExample2.swift; sourceTree = "<group>"; };
 		C3418F8C29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C3418F8D29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C3418F9029B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ColorEntity+CoreDataProperties.swift"; path = "JSONDemo/Model/ColorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C35E7B9429B9FB220014B64E /* SizeViewClothes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeViewClothes.swift; sourceTree = "<group>"; };
+		C35E7B9629BA0EA50014B64E /* SizeExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeExample.swift; sourceTree = "<group>"; };
 		C3B3B1E429A8DC4200CA5663 /* EditSkuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSkuView.swift; sourceTree = "<group>"; };
 		C3B3B1E629A8E25600CA5663 /* Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateViewDemo.swift; sourceTree = "<group>"; };
@@ -93,6 +99,8 @@
 			children = (
 				C3B45A4829A62EBD00D4153F /* TestSample.swift */,
 				C3B3B1F529ACB63F00CA5663 /* AddView.swift */,
+				C35E7B9429B9FB220014B64E /* SizeViewClothes.swift */,
+				C35E7B9629BA0EA50014B64E /* SizeExample.swift */,
 				C3CABFB629B4EB97004E9CDD /* ColorListView.swift */,
 				C3CABFAE29B45066004E9CDD /* DetailView.swift */,
 				C3B3B1EB29AA272400CA5663 /* FilteredList.swift */,
@@ -109,6 +117,7 @@
 				C3B3B1E929AA174300CA5663 /* PredicateViewDemo.swift */,
 				C3B3B20329ACE3BE00CA5663 /* FirstExample.swift */,
 				C33F9E1929B60DC400C542F8 /* SelectedExample.swift */,
+				C33F9E1B29B6EF0C00C542F8 /* SelectedExample2.swift */,
 				C3CABFB029B46463004E9CDD /* ExampleGeomery.swift */,
 			);
 			path = Example;
@@ -262,6 +271,7 @@
 				C3418F8E29B0EE6C00B5DB3A /* ColorEntity+CoreDataClass.swift in Sources */,
 				C3C4353B299FA18600ACE9D1 /* JSONManager.swift in Sources */,
 				C3CABFB729B4EB97004E9CDD /* ColorListView.swift in Sources */,
+				C35E7B9729BA0EA50014B64E /* SizeExample.swift in Sources */,
 				C3418F8F29B0EE6C00B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */,
 				C31A414229A7917400D30595 /* AddSkuView.swift in Sources */,
 				C3C4353F299FA81600ACE9D1 /* DetailViewSample.swift in Sources */,
@@ -279,6 +289,7 @@
 				C3418F9129B23F1500B5DB3A /* ColorEntity+CoreDataProperties.swift in Sources */,
 				C3B3B1F629ACB63F00CA5663 /* AddView.swift in Sources */,
 				C3C4354629A247A500ACE9D1 /* OneToOneView.swift in Sources */,
+				C33F9E1C29B6EF0C00C542F8 /* SelectedExample2.swift in Sources */,
 				C3B3B1E529A8DC4200CA5663 /* EditSkuView.swift in Sources */,
 				C3C4355629A25D0D00ACE9D1 /* OneToOneSearchSort.swift in Sources */,
 				C3B3B20429ACE3BE00CA5663 /* FirstExample.swift in Sources */,
@@ -286,6 +297,7 @@
 				C3B3B1EC29AA272400CA5663 /* FilteredList.swift in Sources */,
 				C33F9E1A29B60DC400C542F8 /* SelectedExample.swift in Sources */,
 				C3B3B1F429AA29E200CA5663 /* Sku+CoreDataProperties.swift in Sources */,
+				C35E7B9529B9FB220014B64E /* SizeViewClothes.swift in Sources */,
 				C3C4354429A23AD200ACE9D1 /* CoredataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

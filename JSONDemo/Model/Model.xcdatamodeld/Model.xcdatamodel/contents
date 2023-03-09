@@ -10,6 +10,7 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="selectedColors" optional="YES" attributeType="Transformable"/>
+        <attribute name="sizeClothes" optional="YES" attributeType="Transformable"/>
     </entity>
     <entity name="ColorSelection" representedClassName="ColorSelection" syncable="YES" codeGenerationType="class">
         <attribute name="colors" optional="YES" attributeType="Transformable"/>

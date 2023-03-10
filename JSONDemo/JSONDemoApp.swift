@@ -21,7 +21,8 @@ struct JSONDemoApp: App {
 //          OneToMany()
 //          OneToOneView()
 //          ProductStockView()
-      AddView()
+      DetailExample()
+//      AddView()
         .environment(\.managedObjectContext, coredataStack.container.viewContext)
     }
   }

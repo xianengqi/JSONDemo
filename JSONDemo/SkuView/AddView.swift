@@ -46,8 +46,7 @@ struct AddView: View {
             .frame(height: 20)
             .padding()
           Spacer()
-          
-          
+
           Text("确认新建")
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, alignment: .center)
@@ -62,12 +61,12 @@ struct AddView: View {
               submit()
               self.linkDetail = true
             }
-          
-          NavigationLink(destination: DetailView(colors: selectedColors), isActive: $linkDetail) {
-            EmptyView()
-          }
-        }
 
+//          NavigationLink(destination: DetailView(colors: selectedColors), isActive: $linkDetail) {
+//            EmptyView()
+//          }
+          NavigationLink(destination: DetailExample(), isActive: $linkDetail) { EmptyView() }
+        }
         .padding()
       }
     }
@@ -172,10 +171,9 @@ struct AddView: View {
         .presentationContentInteraction(.scrolls)
     }
   }
-  
-  
+
   @State private var brandName = ""
-  
+
   @ViewBuilder
   func formTitleView() -> some View {
     VStack {
@@ -191,7 +189,7 @@ struct AddView: View {
       }
     }
   }
-  
+
   private func submit() {
     // 把颜色添加进来
     let newColor = ProductEntity(context: viewContext)
@@ -205,9 +203,7 @@ struct AddView: View {
     }
     // 清空颜色
     brandName = ""
-
   }
-  
 }
 
 struct ColorView: View {

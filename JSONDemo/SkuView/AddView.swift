@@ -30,9 +30,10 @@ struct AddView: View {
   @State var showSize = false
   @State private var isSaved = false
   @State private var linkDetail = false
+  @Environment(\.dismiss) private var dismiss
 
   var body: some View {
-    NavigationStack {
+    NavigationView {
       ZStack {
         // 设置全局颜色
         Color(.white)
@@ -60,6 +61,7 @@ struct AddView: View {
               print("保存品牌名称\(submit())")
               submit()
               self.linkDetail = true
+              dismiss()
             }
 
 //          NavigationLink(destination: DetailView(colors: selectedColors), isActive: $linkDetail) {
@@ -70,6 +72,7 @@ struct AddView: View {
         .padding()
       }
     }
+    .navigationBarBackButtonHidden(true)
   }
 
   @ViewBuilder
@@ -180,10 +183,12 @@ struct AddView: View {
       HStack {
         Color.clear.overlay {
           Text("品名")
+            .foregroundColor(.black)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         Color.clear.overlay {
           TextField("请输入品牌", text: $brandName)
+            .foregroundColor(.red)
         }.offset(x: 30)
         Color.clear
       }

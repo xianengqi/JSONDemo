@@ -263,21 +263,6 @@ struct SizeExample: View {
       }.padding()
     }
   }
-  
-  private func addColor() {
-    // 在CoreData中创建一个新的对象
-    let newColor = ColorEntity(context: viewContext)
-    // 设置属性
-    newColor.sizeClothes = [name]
-    // 将保存到CoreData中
-    do {
-      try viewContext.save()
-    } catch {
-      print("Error saving color: (error)")
-    }
-    name = ""
-    showingAlert = false
-  }
 }
 
 // struct SizeViewClothes_Previews: PreviewProvider {

@@ -279,100 +279,120 @@ struct ColorView: View {
   }
 
   @State private var colorsSelected: Set<String> = []
+  @State private var longPressIndex: Int?
+  // 在ForEach中添加一个绑定状态变量用于跟踪删除选项
+  @State private var deletingIndex: Int?
+
+  private func deleteColor(at index: Int) {
+    if let sizeToDelete = colors[index].colors.first {
+      let color = colors.first(where: { $0.colors.contains(sizeToDelete) == true })!
+      viewContext.delete(color)
+      do {
+        try viewContext.save()
+      } catch {
+        print("Error saving context: \(error.localizedDescription)")
+      }
+    }
+  }
 
   @ViewBuilder
   private func content() -> some View {
     HFlow(itemSpacing: 10, rowSpacing: 10) {
-      // 循环显示颜色
-      ForEach(colors, id: \.self) { color in
+      // 循环显示
+//      let sizes = Array(Set(colors.compactMap { $0.sizeClothes }.flatMap { $0 }))
 
-        
-        Text(color.colors.joined(separator: ", "))
-          .foregroundColor(.black)
-          .padding()
-          .frame(height: 30)
-          .contentShape(Rectangle())
-          .overlay(
-            ZStack(alignment: .bottomTrailing) {
-              GeometryReader { geometry in
-                Color.clear
-                  .preference(key: TextExWidthKey.self, value: geometry.size.width)
+      ForEach(colors.indices, id: \.self) { colorEntiy in
+        if let sizeClothes: [String]? = colors[colorEntiy].colors {
+          ForEach(sizeClothes ?? [], id: \.self) { size in
+            Text(size)
+              .foregroundColor(.black)
+              .padding()
+              .frame(height: 30)
+              .contentShape(Rectangle())
+              .overlay(
+                ZStack(alignment: .bottomTrailing) {
+                  GeometryReader { geometry in
+                    Color.clear
+                      .preference(key: TextExWidthKey.self, value: geometry.size.width)
+                  }
+
+                  if selectedColors.contains(size) {
+                    ZStack {
+                      // 打勾时，出现红色圆圈
+                      Circle()
+                        .foregroundColor(.orange)
+                        .frame(height: 10)
+
+                      // 让image出现在红色圆圈上面
+                      Image(systemName: "checkmark")
+                        .resizable()
+                        .foregroundColor(.white)
+                        .frame(width: 8, height: 6)
+
+                    }.offset(x: 0, y: 0)
+                  } else {
+                    //                Image(systemName: "square")
+                    //                  .foregroundColor(.black)
+                  }
+
+                  //              Text(color.colors)
+                  //                .foregroundColor(.black)
+
+                  RoundedRectangle(cornerRadius: 4)
+
+                    .strokeBorder(selectedColors.contains(size) ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
+                    .opacity(0.5)
+                }
+              )
+              // 把选中的勾宽度随着文字宽度放在右下角
+
+              .contentShape(Rectangle())
+
+              .onAppear {
+                // 清空选中的状态
+                print("content：生命周期初始化")
+                //            selectedColors.removeAll()
+              }
+              .onTapGesture {
+                // 如果已经被选择，则从selectedColors数组中删除它；否则，将其添加到数组中
+                if selectedColors.contains(size) {
+                  selectedColors.removeAll(where: { $0 == size })
+
+                  //              color.isSelected = false
+                } else {
+                  selectedColors.append(size)
+                  //              color.isSelected = true
+                }
+                do {
+                  try viewContext.save()
+                } catch {
+                  print("Error saving color: \(error.localizedDescription)")
+                }
               }
 
-              if color.colors.allSatisfy({ selectedColors.contains($0) }) {
-                ZStack {
-                  // 打勾时，出现红色圆圈
-                  Circle()
-                    .foregroundColor(.orange)
-                    .frame(height: 10)
-
-                  // 让image出现在红色圆圈上面
-                  Image(systemName: "checkmark")
-                    .resizable()
-                    .foregroundColor(.white)
-                    .frame(width: 8, height: 6)
-
-                }.offset(x: 0, y: 0)
-              } else {
-//                Image(systemName: "square")
-//                  .foregroundColor(.black)
+              //         长按弹出提示删除框
+              .onLongPressGesture {
+                if let color = colors.first(where: { $0.colors.contains(size) == true }) {
+                  deleteIndex = colors.firstIndex(of: color)
+                  deleteAlert = true
+                }
               }
 
-              //              Text(color.colors)
-              //                .foregroundColor(.black)
-
-              RoundedRectangle(cornerRadius: 4)
-
-                .strokeBorder(color.colors.allSatisfy { selectedColors.contains($0) } ? Color.red : Color.black, style: StrokeStyle(lineWidth: 1))
-                .opacity(0.5)
-            }
-          )
-          // 把选中的勾宽度随着文字宽度放在右下角
-
-          .contentShape(Rectangle())
-
-          .onAppear {
-            // 清空选中的颜色状态
-            print("content：生命周期初始化")
-            //            selectedColors.removeAll()
-          }
-          .onTapGesture {
-            // 如果颜色已经被选择，则从selectedColors数组中删除它；否则，将其添加到数组中
-            if color.colors.allSatisfy({ selectedColors.contains($0) }) {
-              selectedColors.removeAll(where: { $0 == color.colors.first })
-            } else {
-              selectedColors.append(contentsOf: color.colors)
-
-            }
-            do {
-              try viewContext.save()
-            } catch {
-              print("Error saving color: \(error.localizedDescription)")
-            }
-          }
-
-//         长按弹出提示删除框
-          .onLongPressGesture {
-            // 我想让它比弹窗慢些显示删除
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-              if let index = colors.firstIndex(of: color) {
-                let colorEntity = colorsFetchRequest[index]
-
-                viewContext.delete(colorEntity)
-                try? viewContext.save()
+              .alert(isPresented: $deleteAlert) {
+                let sizeToDelete = colors[deleteIndex!].colors.first!
+                return Alert(
+                  title: Text("确定要删除 \(sizeToDelete) 吗？"),
+                  primaryButton: .destructive(Text("删除"), action: {
+                    // 调用删除操作函数来删除选定的颜色
+                    deleteColor(at: deleteIndex!)
+                  }),
+                  secondaryButton: .cancel(Text("取消"))
+                )
               }
-            }
-
-            deleteAlert = true
-
-            //            print("长按删除\(colors)")
           }
-          .alert("删除颜色", isPresented: $deleteAlert) {
-            Button("确认删除") {
-              // 显示删除的名称
-              //              print("删除\(colorName)")
-            }
-          }
+        }
+
+        //        let isSelected = selectedColors.contains(color.colors)
       }
 
       Text("新增颜色")
@@ -402,7 +422,7 @@ struct ColorView: View {
     }
     .padding(8)
 
-//    .frame(maxWidth: 300)
+    //    .frame(maxWidth: 300)
   }
 
   @ViewBuilder
@@ -417,42 +437,21 @@ struct ColorView: View {
           print("已选择的颜色：\(selectedColors)")
 
           // 将选择的颜色和尺码清空，将显示另一个视图
-//          selectedColors.removeAll()
+          //          selectedColors.removeAll()
 
           presentationMode.wrappedValue.dismiss()
         }
       }.padding()
     }
   }
+}
 
-//  private func addColor() {
-//    // 在CoreData中创建一个新的颜色对象
-//    let newColor = ColorEntity(context: viewContext)
-//    // 设置颜色的属性
-//    newColor.colors = [name]
-//    // 将颜色保存到CoreData中
-//    do {
-//      try viewContext.save()
-//    } catch {
-//      print("Error saving color: (error)")
-//    }
-//    name = ""
-//    showingAlert = false
+// @available(iOS 16.4, *)
+// struct AddView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    AddView()
 //  }
-}
-
-struct SizeView: View {
-  var body: some View {
-    Text("尺码页面")
-  }
-}
-
-@available(iOS 16.4, *)
-struct AddView_Previews: PreviewProvider {
-  static var previews: some View {
-    AddView()
-  }
-}
+// }
 
 struct TextExWidthKey: PreferenceKey {
   static var defaultValue: CGFloat = 0

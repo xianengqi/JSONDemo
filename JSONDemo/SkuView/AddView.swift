@@ -29,6 +29,7 @@ struct AddView: View {
   @State var showColor = false
   @State var showSize = false
   @State private var isSaved = false
+  @State private var linkDetail = false
 
   var body: some View {
     NavigationStack {
@@ -41,26 +42,30 @@ struct AddView: View {
           formColorView()
             .frame(height: 20)
             .padding()
+          formTitleView()
+            .frame(height: 20)
+            .padding()
           Spacer()
-
-          Button(action: {
-            // 这里写保存到CoreData的逻辑
-//            saveColors()
-//            selectedColors = []
-          }, label: {
-            // Navigation link to DetailView
-            NavigationLink(destination: DetailView(colors: selectedColors)) {
-              Text("保存")
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .frame(height: 40)
-                .background(.blue)
-                .cornerRadius(6)
-                .padding()
-                .opacity(selectedColors.isEmpty ? 0.5 : 1.0)
-                .disabled(selectedColors.isEmpty)
+          
+          
+          Text("确认新建")
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .frame(height: 40)
+            .background(.blue)
+            .cornerRadius(6)
+            .padding()
+            .opacity(brandName.isEmpty ? 0.5 : 1.0)
+            .disabled(brandName.isEmpty)
+            .onTapGesture {
+              print("保存品牌名称\(submit())")
+              submit()
+              self.linkDetail = true
             }
-          })
+          
+          NavigationLink(destination: DetailView(colors: selectedColors), isActive: $linkDetail) {
+            EmptyView()
+          }
         }
 
         .padding()
@@ -167,23 +172,42 @@ struct AddView: View {
         .presentationContentInteraction(.scrolls)
     }
   }
+  
+  
+  @State private var brandName = ""
+  
+  @ViewBuilder
+  func formTitleView() -> some View {
+    VStack {
+      HStack {
+        Color.clear.overlay {
+          Text("品名")
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        Color.clear.overlay {
+          TextField("请输入品牌", text: $brandName)
+        }.offset(x: 30)
+        Color.clear
+      }
+    }
+  }
+  
+  private func submit() {
+    // 把颜色添加进来
+    let newColor = ProductEntity(context: viewContext)
+    newColor.name = brandName
+    print("品牌名称: \(String(describing: newColor.name))")
 
-//  private func saveColors() {
-//    // 把从ColorView里选择的颜色保存到AddView里面的数组
-//
-//    // 在CoreData中创建一个新的颜色对象
-//    let colorNames = selectedColors.map { String($0) }
-//    let newColor = ColorEntity(context: viewContext)
-//    newColor.colors = newColor.colors
-//    newColor.colors.append(contentsOf: colorNames)
-//    do {
-//      try viewContext.save()
-//      isSaved = true
-//    } catch {
-//      let nsError = error as NSError
-//      fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//    }
-//  }
+    do {
+      try viewContext.save()
+    } catch {
+      print("Error saving color: \(error.localizedDescription)")
+    }
+    // 清空颜色
+    brandName = ""
+
+  }
+  
 }
 
 struct ColorView: View {
